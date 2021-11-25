@@ -1,17 +1,33 @@
 {% extends 'base.html' %} {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ username_form }}
-    <input type="submit" value="Submit">
-</form>
+<section>
+  <div class="container-fluid pt-4">
+    <div class="row pt-4">
+      <div class="col-3"></div>
+      <div class="col-6 d-flex justify-content-center">
+        <form method="post">
+            {% csrf_token %}
+            {{ tweet_form }}
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    </div>
+  </div>
+</section>
 
-<form method="post">
-    {% csrf_token %}
-    {{ tweet_form }}
-    <input type="submit" value="Submit">
-</form>
-
-{% for tweet in tweets %}
-  <p>{{ tweet.text }}</p>
-{% endfor %}
+<section>
+  <div class="container-fluid pt-4">
+    <div class="row pt-4">
+      <div class="col-3"></div>
+      <div class="col-6">
+        {% for tweet in tweets %}
+          <div class="row p-2 bg-light rounded mb-3">
+            <div class="col-12 d-flex justify-content-between">
+              <p>{{ tweet.text }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock content %}
