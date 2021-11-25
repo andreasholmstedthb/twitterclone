@@ -1,0 +1,10 @@
+.forms textarea {
+  max-height: 100px;
+}
+.forms label {
+  display: none;
+}
+.forms input[type=submit] {
+  border: none;
+  max-width: 100px;
+}

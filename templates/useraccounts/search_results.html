@@ -4,10 +4,10 @@
     <div class="row pt-4">
       <div class="col-3"></div>
       <div class="col-6 d-flex justify-content-center">
-        <form method="post">
+        <form method="post" class="forms">
             {% csrf_token %}
             {{ username_form }}
-            <input type="submit" value="Submit">
+            <input type="submit" class="bg-info text-light px-3 py-1 mt-2" value="Submit">
         </form>
     </div>
     </div>
@@ -18,32 +18,31 @@
     <div class="row pt-4">
       <div class="col-3"></div>
       <div class="col-6">
-  {% if results %}
-    {% for result in results %}
-      <div class="row p-2 bg-light rounded mb-3">
-        <div class="col-12 d-flex justify-content-between">
-        <span>{{ result.user.username }}</span>
-        {% if result not in request.user.user_account.follows.all %}
-          <a href="{% url 'useraccounts:follow' useraccount_id=result.id %}">Follow</a>
+        {% if results %}
+          {% for result in results %}
+            <div class="row p-2 bg-light rounded mb-3">
+              <div class="col-12 d-flex justify-content-between">
+              <span>{{ result.user.username }}</span>
+              {% if result not in request.user.user_account.follows.all %}
+                <a href="{% url 'useraccounts:follow' useraccount_id=result.id %}">Follow</a>
+              {% else %}
+                <a href="{% url 'useraccounts:unfollow' useraccount_id=result.id %}">Unfollow</a>
+              {% endif %}
+              </div>
+            </div>
+          {% endfor %}
         {% else %}
-          <a href="{% url 'useraccounts:unfollow' useraccount_id=result.id %}">Unfollow</a>
+          <p>No results</p>
         {% endif %}
-        </div>
       </div>
-    {% endfor %}
-  {% else %}
-    <p>No results</p>
-  {% endif %}
-</div>
-</div>
-</div>
-  </section>
+    </div>
+  </div>
+</section>
 
-    <script>
-      $('#id_username').val('{{ search_string }}')
-      if('{{ search_string }}'.length !== 0) {
-        window.history.pushState("", "", '/results/{{ search_string }}/');
-      }
-
-    </script>
+<script>
+  $('#id_username').val('{{ search_string }}')
+  if('{{ search_string }}'.length !== 0) {
+    window.history.pushState("", "", '/results/{{ search_string }}/');
+  }
+</script>
 {% endblock content %}

@@ -1,7 +1,6 @@
 from django.db import models
 from useraccounts.models import UserAccount
 
-# Create your models here.
 class Tweet(models.Model):
     user_account = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
