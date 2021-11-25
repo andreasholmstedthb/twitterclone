@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ username_form }}
+    <input type="submit" value="Submit">
+</form>
+
+<form method="post">
+    {% csrf_token %}
+    {{ tweet_form }}
+    <input type="submit" value="Submit">
+</form>
+
+{% for tweet in tweets %}
+  <p>{{ tweet.text }}</p>
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+  {% if results %}
+    {% for result in results %}
+      <p>{{ result.user.username }}
+        {% if result not in request.user.user_account.follows.all %}
+          <a href="{% url 'useraccounts:follow' useraccount_id=result.id %}">Follow</a>
+        {% else %}
+          <a href="{% url 'useraccounts:unfollow' useraccount_id=result.id %}">Unfollow</a>
+        {% endif %}
+      </p>
+    {% endfor %}
+  {% else %}
+    <p>No results</p>
+  {% endif %}
+{% endblock content %}
